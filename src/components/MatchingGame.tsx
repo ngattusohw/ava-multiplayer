@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, Zap, Check, X, ArrowRight, Trophy } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
 import type { DataSource, Tool } from '../data/gameData';
-import { checkMatch } from '../data/gameData';
 
 function DataSourceCard({
   dataSource,
