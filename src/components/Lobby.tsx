@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Users, Zap, Brain, Trophy, Settings } from 'lucide-react';
+import { Play, Users, Zap, Brain, Trophy, Settings, ArrowLeft } from 'lucide-react';
 import { useGameStore, createLocalPlayer } from '../store/gameStore';
 
-export function Lobby() {
+interface LobbyProps {
+  onBack?: () => void;
+}
+
+export function Lobby({ onBack }: LobbyProps) {
   const [playerName, setPlayerName] = useState('');
   const [hasJoined, setHasJoined] = useState(false);
   const {
@@ -51,6 +55,20 @@ export function Lobby() {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-12">
+        {/* Back button */}
+        {onBack && (
+          <motion.button
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={onBack}
+            className="absolute top-8 left-8 p-3 bg-surface-700/80 hover:bg-surface-600 rounded-xl transition-colors z-20"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </motion.button>
+        )}
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

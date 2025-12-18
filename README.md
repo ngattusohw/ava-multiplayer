@@ -25,12 +25,33 @@ Solve investigation scenarios by building the correct sequence of tool calls. Th
 # Install dependencies
 npm install
 
-# Start development server
+# Start frontend dev server only (single player)
 npm run dev
+
+# Start PartyKit server for multiplayer
+npm run dev:party
+
+# Start both at once (recommended)
+npm run dev:all
 
 # Build for production
 npm run build
+
+# Deploy PartyKit to production
+npm run deploy:party
 ```
+
+## Multiplayer Setup
+
+The multiplayer mode uses **PartyKit** for real-time WebSocket communication.
+
+### Local Development
+Run `npm run dev:all` to start both the Vite frontend (port 5173) and PartyKit server (port 1999).
+
+### Production Deployment
+1. Deploy PartyKit: `npm run deploy:party`
+2. Update the `PARTYKIT_HOST` in `src/hooks/useMultiplayer.ts` with your deployed URL
+3. Deploy frontend to Vercel: `vercel`
 
 ## Tech Stack
 

@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:party": "partykit dev",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev:party\"",
     "build": "tsc -b && vite build",
+    "deploy:party": "partykit deploy",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,9 +18,11 @@
     "@dnd-kit/utilities": "^3.2.2",
     "framer-motion": "^12.23.26",
     "lucide-react": "^0.561.0",
+    "partykit": "^0.0.115",
     "partysocket": "^1.1.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "unenv": "^2.0.0-rc.0",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
@@ -27,6 +32,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.23",
+    "concurrently": "^9.2.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
