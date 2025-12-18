@@ -8,7 +8,7 @@ A multiplayer puzzle game to help the Somethings team learn how AVA's AI tools w
 Race against time to correctly match data sources to their corresponding AVA tools. Build streaks for bonus points!
 
 - **Easy**: 4 pairs, 45 seconds
-- **Medium**: 6 pairs, 60 seconds  
+- **Medium**: 6 pairs, 60 seconds
 - **Hard**: 8 pairs, 90 seconds
 
 ### 🏆 Chain Builder

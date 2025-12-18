@@ -6,14 +6,14 @@ import { useGameStore, createLocalPlayer } from '../store/gameStore';
 export function Lobby() {
   const [playerName, setPlayerName] = useState('');
   const [hasJoined, setHasJoined] = useState(false);
-  const { 
-    players, 
-    difficulty, 
-    addPlayer, 
-    setCurrentPlayer, 
+  const {
+    players,
+    difficulty,
+    addPlayer,
+    setCurrentPlayer,
     setDifficulty,
     startMatchingGame,
-    startChainBuilder 
+    startChainBuilder
   } = useGameStore();
 
   const handleJoin = () => {
@@ -61,7 +61,7 @@ export function Lobby() {
             <Zap className="w-4 h-4 text-neon-cyan" />
             <span className="text-sm text-neon-cyan font-medium">Somethings Team Game</span>
           </div>
-          
+
           <h1 className="text-6xl md:text-8xl font-black mb-4 tracking-tight">
             <span className="bg-gradient-to-r from-neon-cyan via-neon-pink to-neon-yellow bg-clip-text text-transparent">
               AVA
@@ -69,7 +69,7 @@ export function Lobby() {
             <br />
             <span className="text-white">ARCHITECT</span>
           </h1>
-          
+
           <p className="text-xl text-slate-400 max-w-xl mx-auto">
             Learn how AVA's tools work together in a fast-paced puzzle game
           </p>
@@ -87,7 +87,7 @@ export function Lobby() {
                 className="bg-surface-800/80 backdrop-blur-xl border border-surface-600 rounded-3xl p-8 md:p-12"
               >
                 <h2 className="text-2xl font-bold mb-6 text-center">Enter Your Name</h2>
-                
+
                 <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                   <input
                     type="text"

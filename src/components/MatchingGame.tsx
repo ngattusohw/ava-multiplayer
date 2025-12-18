@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, Zap, Check, X, ArrowRight, Trophy } from 'lucide-react';
 import { useGameStore } from '../store/gameStore';
-import { DataSource, Tool, checkMatch } from '../data/gameData';
+import type { DataSource, Tool } from '../data/gameData';
+import { checkMatch } from '../data/gameData';
 
-function DataSourceCard({ 
-  dataSource, 
+function DataSourceCard({
+  dataSource,
   isMatched,
   onDragStart,
   onDragEnd,
-}: { 
+}: {
   dataSource: DataSource;
   isMatched: boolean;
   onDragStart: () => void;
@@ -19,8 +20,8 @@ function DataSourceCard({
     <motion.div
       layout
       initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: isMatched ? 0.5 : 1, 
+      animate={{
+        opacity: isMatched ? 0.5 : 1,
         y: 0,
         scale: isMatched ? 0.95 : 1,
       }}
@@ -28,11 +29,11 @@ function DataSourceCard({
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       className={`relative p-4 rounded-xl border-2 cursor-grab active:cursor-grabbing transition-all ${
-        isMatched 
-          ? 'bg-neon-green/10 border-neon-green/30' 
+        isMatched
+          ? 'bg-neon-green/10 border-neon-green/30'
           : 'bg-surface-700 border-surface-600 hover:border-neon-cyan/50'
       }`}
-      style={{ 
+      style={{
         borderColor: isMatched ? undefined : dataSource.color + '40',
       }}
       whileHover={!isMatched ? { scale: 1.02 } : undefined}
@@ -44,7 +45,7 @@ function DataSourceCard({
         </div>
       )}
       <div className="flex items-center gap-3">
-        <div 
+        <div
           className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
           style={{ backgroundColor: dataSource.color + '20' }}
         >
@@ -59,12 +60,12 @@ function DataSourceCard({
   );
 }
 
-function ToolCard({ 
-  tool, 
+function ToolCard({
+  tool,
   isTarget,
   hasMatch,
   onDrop,
-}: { 
+}: {
   tool: Tool;
   isTarget: boolean;
   hasMatch: boolean;
@@ -74,15 +75,15 @@ function ToolCard({
     <motion.div
       layout
       initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: 1, 
+      animate={{
+        opacity: 1,
         y: 0,
       }}
       onDragOver={(e) => e.preventDefault()}
       onDrop={onDrop}
       className={`relative p-4 rounded-xl border-2 transition-all ${
-        isTarget 
-          ? 'bg-neon-cyan/20 border-neon-cyan scale-105' 
+        isTarget
+          ? 'bg-neon-cyan/20 border-neon-cyan scale-105'
           : hasMatch
             ? 'bg-neon-green/10 border-neon-green/30'
             : 'bg-surface-700 border-surface-600'
@@ -94,7 +95,7 @@ function ToolCard({
         </div>
       )}
       <div className="flex items-center gap-3">
-        <div 
+        <div
           className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl"
           style={{ backgroundColor: tool.color + '20' }}
         >
@@ -143,8 +144,8 @@ function FeedbackPopup({ correct, message }: { correct: boolean; message: string
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -20, scale: 0.9 }}
       className={`fixed bottom-8 left-1/2 -translate-x-1/2 px-6 py-3 rounded-full font-bold flex items-center gap-2 z-50 ${
-        correct 
-          ? 'bg-neon-green text-surface-900' 
+        correct
+          ? 'bg-neon-green text-surface-900'
           : 'bg-red-500 text-white'
       }`}
     >
@@ -189,9 +190,9 @@ export function MatchingGame() {
   // Handle drop
   const handleDrop = (toolId: string) => {
     if (!draggedDataId) return;
-    
+
     const isCorrect = makeMatch(draggedDataId, toolId);
-    
+
     setFeedback({
       correct: isCorrect,
       message: isCorrect ? `+${10 * (1 + Math.floor((currentPlayer?.streak || 0) / 3))} points!` : 'Try again!',
@@ -235,10 +236,10 @@ export function MatchingGame() {
             </div>
 
             {/* Timer */}
-            <motion.div 
+            <motion.div
               className={`flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xl ${
-                timeRemaining <= 10 
-                  ? 'bg-red-500/20 text-red-400' 
+                timeRemaining <= 10
+                  ? 'bg-red-500/20 text-red-400'
                   : 'bg-surface-700 text-white'
               }`}
               animate={timeRemaining <= 10 ? { scale: [1, 1.05, 1] } : undefined}
@@ -255,7 +256,7 @@ export function MatchingGame() {
                 <span className="text-2xl font-bold text-white">{currentPlayer?.score || 0}</span>
               </div>
               {(currentPlayer?.streak || 0) >= 3 && (
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   className="px-3 py-1 bg-neon-yellow/20 text-neon-yellow rounded-full text-sm font-bold"

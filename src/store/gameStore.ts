@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { DataSource, Tool, GameScenario, generateMatchRound, SCENARIOS } from '../data/gameData';
+import type { DataSource, Tool, GameScenario } from '../data/gameData';
+import { generateMatchRound, SCENARIOS } from '../data/gameData';
 
 export type GameMode = 'lobby' | 'matching' | 'chain-builder' | 'results';
 export type GamePhase = 'waiting' | 'countdown' | 'playing' | 'round-end' | 'game-over';
@@ -46,7 +47,7 @@ export interface GameState {
   // Chain builder state
   currentScenario: GameScenario | null;
   playerChain: string[]; // Tool IDs in order
-  
+
   // Drag state
   draggedItem: { type: 'data' | 'tool'; id: string } | null;
 
@@ -58,7 +59,7 @@ export interface GameState {
   removePlayer: (playerId: string) => void;
   updatePlayer: (playerId: string, updates: Partial<Player>) => void;
   setCurrentPlayer: (playerId: string) => void;
-  
+
   // Game actions
   startMatchingGame: () => void;
   startChainBuilder: () => void;
@@ -69,10 +70,10 @@ export interface GameState {
   nextRound: () => void;
   endGame: () => void;
   resetGame: () => void;
-  
+
   // Timer
   decrementTime: () => void;
-  
+
   // Drag and drop
   setDraggedItem: (item: { type: 'data' | 'tool'; id: string } | null) => void;
 }
@@ -100,7 +101,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   currentScenario: null,
   playerChain: [],
-  
+
   draggedItem: null,
 
   // Mode and phase setters
@@ -129,7 +130,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   startMatchingGame: () => {
     const { difficulty } = get();
     const { dataSources, tools, correctMatches } = generateMatchRound(difficulty);
-    
+
     set({
       mode: 'matching',
       phase: 'countdown',
@@ -151,7 +152,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   // Start chain builder
   startChainBuilder: () => {
     const scenario = SCENARIOS[Math.floor(Math.random() * SCENARIOS.length)];
-    
+
     set({
       mode: 'chain-builder',
       phase: 'countdown',
@@ -232,7 +233,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     // Score based on how many correct tools in correct positions
     let score = 0;
     const correctChain = currentScenario.correctChain;
-    
+
     for (let i = 0; i < Math.min(playerChain.length, correctChain.length); i++) {
       if (playerChain[i] === correctChain[i]) {
         score += 50; // Correct tool in correct position
@@ -242,7 +243,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     }
 
     // Bonus for getting the full chain correct
-    if (playerChain.length === correctChain.length && 
+    if (playerChain.length === correctChain.length &&
         playerChain.every((t, i) => t === correctChain[i])) {
       score += currentScenario.points;
     }
@@ -261,7 +262,7 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   nextRound: () => {
     const { roundNumber, totalRounds, mode, difficulty } = get();
-    
+
     if (roundNumber >= totalRounds) {
       set({ phase: 'game-over' });
       return;
@@ -323,7 +324,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   decrementTime: () => {
     const { timeRemaining, phase } = get();
     if (phase !== 'playing') return;
-    
+
     if (timeRemaining <= 1) {
       set({ timeRemaining: 0, phase: 'round-end' });
     } else {

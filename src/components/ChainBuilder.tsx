@@ -31,10 +31,10 @@ function Countdown({ onComplete }: { onComplete: () => void }) {
   );
 }
 
-function ToolPalette({ 
-  onAddTool, 
-  usedTools 
-}: { 
+function ToolPalette({
+  onAddTool,
+  usedTools
+}: {
   onAddTool: (toolId: string) => void;
   usedTools: string[];
 }) {
@@ -109,11 +109,11 @@ function ToolPalette({
   );
 }
 
-function ChainDisplay({ 
-  chain, 
-  onRemove, 
-  onReorder 
-}: { 
+function ChainDisplay({
+  chain,
+  onRemove,
+  onReorder
+}: {
   chain: string[];
   onRemove: (index: number) => void;
   onReorder: (newChain: string[]) => void;
@@ -131,9 +131,9 @@ function ChainDisplay({
 
   return (
     <div className="bg-surface-800/50 border border-surface-600 rounded-2xl p-4">
-      <Reorder.Group 
-        axis="x" 
-        values={chain} 
+      <Reorder.Group
+        axis="x"
+        values={chain}
         onReorder={onReorder}
         className="flex items-center gap-2 overflow-x-auto pb-2"
       >
@@ -152,7 +152,7 @@ function ChainDisplay({
                 {index > 0 && (
                   <ArrowRight className="w-4 h-4 text-slate-500 flex-shrink-0" />
                 )}
-                <div 
+                <div
                   className="relative group bg-surface-700 border rounded-xl p-3 cursor-grab active:cursor-grabbing flex-shrink-0"
                   style={{ borderColor: tool.color + '40' }}
                 >
@@ -255,7 +255,7 @@ export function ChainBuilder() {
                 Round <span className="text-white font-bold">{roundNumber}</span> of {totalRounds}
               </div>
               <div className={`px-3 py-1 rounded-full text-sm capitalize ${
-                currentScenario.difficulty === 'easy' 
+                currentScenario.difficulty === 'easy'
                   ? 'bg-green-500/20 text-green-400'
                   : currentScenario.difficulty === 'medium'
                     ? 'bg-yellow-500/20 text-yellow-400'
@@ -265,10 +265,10 @@ export function ChainBuilder() {
               </div>
             </div>
 
-            <motion.div 
+            <motion.div
               className={`flex items-center gap-2 px-4 py-2 rounded-full font-mono text-xl ${
-                timeRemaining <= 15 
-                  ? 'bg-red-500/20 text-red-400' 
+                timeRemaining <= 15
+                  ? 'bg-red-500/20 text-red-400'
                   : 'bg-surface-700 text-white'
               }`}
               animate={timeRemaining <= 15 ? { scale: [1, 1.05, 1] } : undefined}
